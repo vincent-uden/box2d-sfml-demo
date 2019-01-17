@@ -1,8 +1,7 @@
 #include "../headers/Sprite.h"
 
-Sprite::Sprite(Game &game) {
-    this->game = &game;
-    this->world = game.getWorld();
+Sprite::Sprite(b2World* world) {
+    this->world = world;
 }
 
 Sprite::Sprite() {
@@ -21,7 +20,11 @@ void Sprite::draw(sf::RenderWindow &window) {
 
 }
 
-BoxSprite::BoxSprite(Game &game): Sprite(game) {
+b2Body* Sprite::getBody() {
+    return body;
+}
+
+BoxSprite::BoxSprite(b2World* world): Sprite(world) {
     bodyDef.type = b2_dynamicBody;
     bodyDef.position.Set(0.0f, 4.0f);
     body = world->CreateBody(&bodyDef);

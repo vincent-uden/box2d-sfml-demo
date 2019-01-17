@@ -9,6 +9,8 @@ Game::Game():
     bgFill.setSize(sf::Vector2f(windowWidth, windowHeight));
     bgFill.setFillColor(sf::Color(51, 51, 51));
     bgFill.setPosition(sf::Vector2f(0, 0));
+
+    testBody = BoxSprite(&box2dWorld);
 }
 
 Game::~Game() {
@@ -47,6 +49,16 @@ void Game::update() {
         }
     }
     // END SFML Events
+    //
+    // Box2D EVENTS
+
+    std::cout << testBody.getBody()->GetPosition().y << std::endl;
+
+    box2dWorld.Step(dt, 6, 2);
+
+    // END Box2D EVENTS
+
+    
 }
 
 void Game::draw() {
@@ -55,6 +67,3 @@ void Game::draw() {
     window.display();
 }
 
-b2World* Game::getWorld() {
-    return &box2dWorld;
-}

@@ -6,6 +6,9 @@
 #include "Box2D.h"
 #include "Sprite.h"
 
+class BoxSprite;
+class Sprite;
+
 class Game {
 public:
     Game();
@@ -34,6 +37,10 @@ private:
 
     b2Vec2 gravity = b2Vec2(0.0f, -10.0f);
     b2World box2dWorld;
+
+    BoxSprite testBody;
+    
+
 
 
 };

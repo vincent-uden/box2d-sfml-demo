@@ -4,32 +4,30 @@
 #include <iostream>
 
 #include "Box2D.h"
-#include "./Game.h"
-
-class Game;
 
 
 class Sprite {
 public:
-    Sprite(Game &game);
+    Sprite(b2World* world);
     Sprite();
     ~Sprite();
 
     virtual void update(float dt);
     virtual void draw(sf::RenderWindow &window);
+    
+    b2Body* getBody();
 
 protected:
     b2BodyDef bodyDef;
     b2Body* body;
     b2FixtureDef fixtureDef;
 
-    Game* game;
     b2World* world;
 };
 
 class BoxSprite: public Sprite {
 public:
-    BoxSprite(Game &game);
+    BoxSprite(b2World* worldd);
     BoxSprite();
     ~BoxSprite();
 
