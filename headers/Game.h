@@ -4,6 +4,7 @@
 #include <iostream>
 
 #include "Box2D.h"
+#include "Sprite.h"
 
 class Game {
 public:
@@ -12,9 +13,12 @@ public:
 
     void run();
 
+    b2World* getWorld();
+
 private:
     void update();
     void draw();
+
 
     static const int windowWidth = 1200;
     static const int windowHeight = 800;
@@ -30,6 +34,8 @@ private:
 
     b2Vec2 gravity = b2Vec2(0.0f, -10.0f);
     b2World box2dWorld;
+
+
 };
 
 

@@ -54,3 +54,7 @@ void Game::draw() {
 
     window.display();
 }
+
+b2World* Game::getWorld() {
+    return &box2dWorld;
+}
