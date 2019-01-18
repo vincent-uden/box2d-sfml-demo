@@ -50,7 +50,7 @@ protected:
 
 class BoxSpriteDynamic: public BoxSprite {
 public:
-    BoxSpriteDynamic(b2World* world, int width, int height, float dens);
+    BoxSpriteDynamic(b2World* world, float width, float height, float dens, float fric, float x, float y);
     BoxSpriteDynamic();
     ~BoxSpriteDynamic();
 private:
@@ -59,7 +59,7 @@ private:
 
 class BoxSpriteStatic: public BoxSprite {
 public:
-    BoxSpriteStatic(b2World* world, int width, int height);
+    BoxSpriteStatic(b2World* world, float width, float height, float fric, float x, float y);
     BoxSpriteStatic();
     ~BoxSpriteStatic();
 };
@@ -83,7 +83,7 @@ protected:
 
 class CircleSpriteDynamic: public CircleSprite {
 public:
-    CircleSpriteDynamic(b2World* world, float rad, float dens);
+    CircleSpriteDynamic(b2World* world, float rad, float dens, float fric, float x, float y);
     CircleSpriteDynamic();
     ~CircleSpriteDynamic();
 };
@@ -91,7 +91,7 @@ public:
 
 class CircleSpriteStatic: public CircleSprite {
 public:
-    CircleSpriteStatic(b2World* world, float rad);
+    CircleSpriteStatic(b2World* world, float rad, float fric, float x, float y);
     CircleSpriteStatic();
     ~CircleSpriteStatic();
 };

@@ -35,15 +35,11 @@ private:
     sf::Time deltaTime;
     sf::Event event;
         
-
     float dt;
     bool isRunning;
 
     b2Vec2 gravity = b2Vec2(0.0f, -10.0f);
     b2World box2dWorld;
-
-    CircleSpriteDynamic testBody;
-    BoxSpriteStatic testBody2;
 
 };
 

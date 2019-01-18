@@ -69,15 +69,15 @@ void BoxSprite::draw(sf::RenderWindow &window) {
     window.draw(sfShape);
 }
 
-BoxSpriteDynamic::BoxSpriteDynamic(b2World* world, int width, int height, float dens): BoxSprite(world, width, height) {
+BoxSpriteDynamic::BoxSpriteDynamic(b2World* world, float width, float height, float dens, float fric, float x, float y): BoxSprite(world, width, height) {
 
-    bodyDef.position.Set(0.0f, 0.0f);
+    bodyDef.position.Set(x, y);
     bodyDef.type = b2_dynamicBody;
     body = world->CreateBody(&bodyDef);
     shape.SetAsBox(b2Width, b2Height);
     fixtureDef.shape = &shape;
     fixtureDef.density = dens;
-    fixtureDef.friction = 0.3f;
+    fixtureDef.friction = fric;
     body->CreateFixture(&fixtureDef);
 }
 
@@ -89,14 +89,14 @@ BoxSpriteDynamic::~BoxSpriteDynamic() {
 
 }
 
-BoxSpriteStatic::BoxSpriteStatic(b2World* world, int width, int height): BoxSprite(world, width, height) {
+BoxSpriteStatic::BoxSpriteStatic(b2World* world, float width, float height, float fric, float x, float y): BoxSprite(world, width, height) {
 
-    bodyDef.position.Set(2.1f, -5.2f);
+    bodyDef.position.Set(x, y);
     bodyDef.type = b2_staticBody;
     body = world->CreateBody(&bodyDef);
     shape.SetAsBox(b2Width, b2Height);
     fixtureDef.shape = &shape;
-    fixtureDef.friction = 0.3f;
+    fixtureDef.friction = fric;
     body->CreateFixture(&fixtureDef);
 
     body->SetTransform(body->GetPosition(), 0.7f);
@@ -150,16 +150,16 @@ void CircleSprite::draw(sf::RenderWindow &window) {
     window.draw(sfShape);
 }
 
-CircleSpriteDynamic::CircleSpriteDynamic(b2World* world, float rad, float dens):
+CircleSpriteDynamic::CircleSpriteDynamic(b2World* world, float rad, float dens, float fric, float x, float y):
 CircleSprite(world, rad){
 
-    bodyDef.position.Set(3.0f, 4.0f);
+    bodyDef.position.Set(x, y);
     bodyDef.type = b2_dynamicBody;
     body = world->CreateBody(&bodyDef);
     shape.m_radius = rad;
     fixtureDef.shape = &shape;
     fixtureDef.density = dens;
-    fixtureDef.friction = 0.3f;
+    fixtureDef.friction = fric;
     body->CreateFixture(&fixtureDef);
 }
 
@@ -174,14 +174,14 @@ CircleSpriteDynamic::~CircleSpriteDynamic() {
 
 
 
-CircleSpriteStatic::CircleSpriteStatic(b2World* world, float rad): 
+CircleSpriteStatic::CircleSpriteStatic(b2World* world, float rad, float fric, float x, float y): 
 CircleSprite(world, rad) {
-    bodyDef.position.Set(3.0f, 4.0f);
+    bodyDef.position.Set(x, y);
     bodyDef.type = b2_staticBody;
     body = world->CreateBody(&bodyDef);
     shape.m_radius = rad;
     fixtureDef.shape = &shape;
-    fixtureDef.friction = 0.3f;
+    fixtureDef.friction = fric;
     body->CreateFixture(&fixtureDef);
 }
 
