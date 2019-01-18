@@ -7,6 +7,7 @@
 #include "Sprite.h"
 
 class BoxSprite;
+class BoxSpriteDynamic;
 class Sprite;
 
 class Game {
@@ -26,11 +27,14 @@ private:
     static const int windowWidth = 1200;
     static const int windowHeight = 800;
 
+    sf::ContextSettings settings = sf::ContextSettings(0, 0, 8); 
+
     sf::RenderWindow window;
     sf::RectangleShape bgFill;
     sf::Clock clock;
     sf::Time deltaTime;
     sf::Event event;
+        
 
     float dt;
     bool isRunning;
@@ -38,10 +42,8 @@ private:
     b2Vec2 gravity = b2Vec2(0.0f, -10.0f);
     b2World box2dWorld;
 
-    BoxSprite testBody;
-    
-
-
+    CircleSpriteDynamic testBody;
+    BoxSpriteStatic testBody2;
 
 };
 
