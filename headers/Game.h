@@ -27,11 +27,14 @@ private:
     static const int windowWidth = 1200;
     static const int windowHeight = 800;
 
+    sf::ContextSettings settings = sf::ContextSettings(0, 0, 8); 
+
     sf::RenderWindow window;
     sf::RectangleShape bgFill;
     sf::Clock clock;
     sf::Time deltaTime;
     sf::Event event;
+        
 
     float dt;
     bool isRunning;

@@ -29,8 +29,8 @@ BoxSprite::BoxSprite(b2World* world, int width, int height): Sprite(world) {
     b2Width = width;
     b2Height = height;
 
-    sfWidth = b2Width * 30 * 2;
-    sfHeight = b2Height * 30 * 2;
+    sfWidth = b2Width * 30 * 2 + 1;
+    sfHeight = b2Height * 30 * 2 + 1;
 
     sfShape = sf::RectangleShape(
               sf::Vector2f(sfWidth, sfHeight));
@@ -98,6 +98,8 @@ BoxSpriteStatic::BoxSpriteStatic(b2World* world, int width, int height): BoxSpri
     fixtureDef.shape = &shape;
     fixtureDef.friction = 0.3f;
     body->CreateFixture(&fixtureDef);
+
+    body->SetTransform(body->GetPosition(), 0.7f);
 }
 
 BoxSpriteStatic::BoxSpriteStatic() {

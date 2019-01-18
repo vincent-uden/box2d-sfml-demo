@@ -2,7 +2,7 @@
 
 Game::Game():
     window(sf::VideoMode(windowWidth, windowHeight), "Box2D Test",
-           sf::Style::Close | sf::Style::Titlebar),
+           sf::Style::Close | sf::Style::Titlebar, settings),
     box2dWorld(gravity) {
     window.setFramerateLimit(60);
 
@@ -11,7 +11,7 @@ Game::Game():
     bgFill.setPosition(sf::Vector2f(0, 0));
 
     testBody = BoxSpriteDynamic(&box2dWorld, 1.0f, 1.0f, 1.0f);
-    testBody2 = BoxSpriteStatic(&box2dWorld, 2.0f, 1.0f);
+    testBody2 = BoxSpriteStatic(&box2dWorld, 12.0f, 1.0f);
 }
 
 Game::~Game() {
