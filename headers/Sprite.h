@@ -63,3 +63,35 @@ public:
     BoxSpriteStatic();
     ~BoxSpriteStatic();
 };
+
+class CircleSprite: public Sprite {
+public:
+    CircleSprite(b2World* world, float rad);
+    CircleSprite();
+    ~CircleSprite();
+    
+    void update(float dt) override;
+    void draw(sf::RenderWindow &window);
+
+protected:
+    b2CircleShape shape;
+    sf::CircleShape sfShape;
+
+    float sfRad;
+    float b2Rad;
+};
+
+class CircleSpriteDynamic: public CircleSprite {
+public:
+    CircleSpriteDynamic(b2World* world, float rad, float dens);
+    CircleSpriteDynamic();
+    ~CircleSpriteDynamic();
+};
+
+
+class CircleSpriteStatic: public CircleSprite {
+public:
+    CircleSpriteStatic(b2World* world, float rad);
+    CircleSpriteStatic();
+    ~CircleSpriteStatic();
+};

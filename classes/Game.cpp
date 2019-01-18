@@ -10,7 +10,7 @@ Game::Game():
     bgFill.setFillColor(sf::Color(51, 51, 51));
     bgFill.setPosition(sf::Vector2f(0, 0));
 
-    testBody = BoxSpriteDynamic(&box2dWorld, 1.0f, 1.0f, 1.0f);
+    testBody = CircleSpriteDynamic(&box2dWorld, 1.0f, 1.0f);
     testBody2 = BoxSpriteStatic(&box2dWorld, 12.0f, 1.0f);
 }
 

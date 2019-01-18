@@ -110,4 +110,87 @@ BoxSpriteStatic::~BoxSpriteStatic() {
 
 }
 
+CircleSprite::CircleSprite(b2World* world, float rad): Sprite(world) {
+    b2Rad = rad;
+
+    sfRad = b2Rad * 30 + 0.5f;
+
+    sfShape = sf::CircleShape(sfRad); 
+    sfShape.setFillColor(sf::Color::Blue);
+    sfShape.setOrigin(sfRad, sfRad);
+}
+
+CircleSprite::CircleSprite() {
+
+}
+
+CircleSprite::~CircleSprite() {
+    
+}
+
+void CircleSprite::update(float dt) {
+    sf::Vector2f b2Pos = sf::Vector2f(body->GetPosition().x,
+                                      body->GetPosition().y);
+    float sfX = b2Pos.x * 30 + windowWidth / 2;
+    float sfY = b2Pos.y * -30 + windowHeight / 2;
+    sfShape.setPosition(sf::Vector2f(sfX, sfY));
+ 
+    float angle = body->GetAngle() * 180 / M_PI;
+    while (angle <= 0){
+        angle += 360;
+    }
+    while (angle > 360){
+        angle -= 360;
+    }
+
+    sfShape.setRotation(-angle);
+}
+
+void CircleSprite::draw(sf::RenderWindow &window) {
+    window.draw(sfShape);
+}
+
+CircleSpriteDynamic::CircleSpriteDynamic(b2World* world, float rad, float dens):
+CircleSprite(world, rad){
+
+    bodyDef.position.Set(3.0f, 4.0f);
+    bodyDef.type = b2_dynamicBody;
+    body = world->CreateBody(&bodyDef);
+    shape.m_radius = rad;
+    fixtureDef.shape = &shape;
+    fixtureDef.density = dens;
+    fixtureDef.friction = 0.3f;
+    body->CreateFixture(&fixtureDef);
+}
+
+
+CircleSpriteDynamic::CircleSpriteDynamic() {
+
+}
+
+CircleSpriteDynamic::~CircleSpriteDynamic() {
+
+}
+
+
+
+CircleSpriteStatic::CircleSpriteStatic(b2World* world, float rad): 
+CircleSprite(world, rad) {
+    bodyDef.position.Set(3.0f, 4.0f);
+    bodyDef.type = b2_staticBody;
+    body = world->CreateBody(&bodyDef);
+    shape.m_radius = rad;
+    fixtureDef.shape = &shape;
+    fixtureDef.friction = 0.3f;
+    body->CreateFixture(&fixtureDef);
+}
+
+CircleSpriteStatic::CircleSpriteStatic() {
+
+}
+
+CircleSpriteStatic::~CircleSpriteStatic() {
+
+}
+
 
