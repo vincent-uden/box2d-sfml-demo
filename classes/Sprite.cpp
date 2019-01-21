@@ -24,7 +24,7 @@ b2Body* Sprite::getBody() {
     return body;
 }
 
-BoxSprite::BoxSprite(b2World* world, int width, int height): Sprite(world) {
+BoxSprite::BoxSprite(b2World* world, float width, float height): Sprite(world) {
 
     b2Width = width;
     b2Height = height;
@@ -99,7 +99,7 @@ BoxSpriteStatic::BoxSpriteStatic(b2World* world, float width, float height, floa
     fixtureDef.friction = fric;
     body->CreateFixture(&fixtureDef);
 
-    body->SetTransform(body->GetPosition(), 0.7f);
+
 }
 
 BoxSpriteStatic::BoxSpriteStatic() {
@@ -113,7 +113,7 @@ BoxSpriteStatic::~BoxSpriteStatic() {
 CircleSprite::CircleSprite(b2World* world, float rad): Sprite(world) {
     b2Rad = rad;
 
-    sfRad = b2Rad * 30 + 0.5f;
+    sfRad = b2Rad * 30;
 
     sfShape = sf::CircleShape(sfRad); 
     sfShape.setFillColor(sf::Color::Blue);

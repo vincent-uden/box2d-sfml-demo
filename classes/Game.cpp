@@ -21,6 +21,8 @@ void Game::run() {
     dt = 0;
     isRunning = true;
 
+    addSprites();
+
     while (isRunning) {
         deltaTime = clock.restart();
         dt = deltaTime.asMilliseconds() / 1000.0f;
@@ -50,6 +52,11 @@ void Game::update() {
     // END SFML Events
     //
     // Box2D EVENTS
+
+    for (int i = 0; i < spriteGroup.size(); i++) {
+        spriteGroup[i]->update(dt);
+    }
+
     box2dWorld.Step(dt, 6, 2);
     // END Box2D EVENTS
 
@@ -58,7 +65,33 @@ void Game::update() {
 
 void Game::draw() {
     window.draw(bgFill);
+
+    for (int i = 0; i < spriteGroup.size(); i++) {
+        spriteGroup[i]->draw(window);
+    }
  
     window.display();
+}
+
+void Game::addSprites() {
+
+    spriteGroup.push_back(std::move(std::unique_ptr<BoxSpriteDynamic>
+        (new BoxSpriteDynamic(&box2dWorld, 1.0f, 1.0f, 
+                              1.0f, 0.3f, 0.0f, -0.4f))));
+
+    spriteGroup.push_back(std::move(std::unique_ptr<BoxSpriteStatic>
+        (new BoxSpriteStatic(&box2dWorld, 20.0f, 0.05f, 
+                             0.3f, 0.0f, -5.0f))));
+
+    spriteGroup.push_back(std::move(std::unique_ptr<CircleSpriteDynamic>
+        (new CircleSpriteDynamic(&box2dWorld, 1.0f, 1.0f, 
+                                 0.3f, 0.0f, 5.0f))));
+
+    for (int i = 0; i < 20; i++) {
+        spriteGroup.push_back(std::move(std::unique_ptr<CircleSpriteDynamic>
+            (new CircleSpriteDynamic(&box2dWorld, 0.2f, 1.0f, 
+                                     0.3f, i / 5.0f - 2.0f, 10.0f))));
+    }
+
 }
 

@@ -30,7 +30,7 @@ protected:
 
 class BoxSprite: public Sprite {
 public:
-    BoxSprite(b2World* world, int width, int height);
+    BoxSprite(b2World* world, float width, float height);
     BoxSprite();
     ~BoxSprite();
 
