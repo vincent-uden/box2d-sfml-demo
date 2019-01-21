@@ -22,6 +22,7 @@ public:
 private:
     void update();
     void draw();
+    void addSprites();
 
 
     static const int windowWidth = 1200;
@@ -45,6 +46,7 @@ private:
     CircleSpriteDynamic testBody;
     BoxSpriteStatic testBody2;
 
+    std::vector<Sprite*> group;
 };
 
 

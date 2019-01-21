@@ -54,8 +54,6 @@ void Game::update() {
     // Box2D EVENTS
 
     //std::cout << testBody.getBody()->GetPosition().y << std::endl;
-    testBody.update(dt);
-    testBody2.update(dt);
 
     box2dWorld.Step(dt, 6, 2);
 
@@ -67,9 +65,11 @@ void Game::update() {
 void Game::draw() {
     window.draw(bgFill);
 
-    testBody.draw(window);
-    testBody2.draw(window);
 
     window.display();
+}
+
+void Game::addSprites() {
+    std::unique_ptr<BoxSpriteStatic> ptr(new BoxSpriteStatic());
 }
 
