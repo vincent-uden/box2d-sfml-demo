@@ -77,7 +77,7 @@ void Game::addSprites() {
 
     spriteGroup.push_back(std::move(std::unique_ptr<BoxSpriteDynamic>
         (new BoxSpriteDynamic(&box2dWorld, 1.0f, 1.0f, 
-                              1.0f, 0.3f, 0.0f, -0.4f))));
+                              1.0f, 0.3f, -6.0f, 5.0f))));
 
     spriteGroup.push_back(std::move(std::unique_ptr<BoxSpriteStatic>
         (new BoxSpriteStatic(&box2dWorld, 20.0f, 0.05f, 
@@ -92,6 +92,8 @@ void Game::addSprites() {
             (new CircleSpriteDynamic(&box2dWorld, 0.2f, 1.0f, 
                                      0.3f, 0.0f, 10.0f - i / 5.0f))));
     }
+
+
 
 }
 

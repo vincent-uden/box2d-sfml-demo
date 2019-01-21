@@ -29,8 +29,8 @@ BoxSprite::BoxSprite(b2World* world, float width, float height): Sprite(world) {
     b2Width = width;
     b2Height = height;
 
-    sfWidth = b2Width * 30 * 2 + 1;
-    sfHeight = b2Height * 30 * 2 + 1;
+    sfWidth = b2Width * worldScale * 2 + 0.5f;
+    sfHeight = b2Height * worldScale * 2 + 0.5f;
 
     sfShape = sf::RectangleShape(
               sf::Vector2f(sfWidth, sfHeight));
@@ -50,8 +50,8 @@ void BoxSprite::update(float dt) {
 
     sf::Vector2f b2Pos = sf::Vector2f(body->GetPosition().x, 
                                       body->GetPosition().y);
-    float sfX = b2Pos.x * 30 + windowWidth / 2;
-    float sfY = b2Pos.y * -30 + windowHeight / 2; 
+    float sfX = b2Pos.x * worldScale + windowWidth / 2;
+    float sfY = b2Pos.y * -worldScale + windowHeight / 2; 
     sfShape.setPosition(sf::Vector2f(sfX, sfY));
 
     float angle = body->GetAngle() * 180 / M_PI;
@@ -79,6 +79,7 @@ BoxSpriteDynamic::BoxSpriteDynamic(b2World* world, float width, float height, fl
     fixtureDef.density = dens;
     fixtureDef.friction = fric;
     body->CreateFixture(&fixtureDef);
+    body->SetLinearVelocity(b2Vec2(10.0f, 0.0f));
 }
 
 BoxSpriteDynamic::BoxSpriteDynamic() {
@@ -113,7 +114,7 @@ BoxSpriteStatic::~BoxSpriteStatic() {
 CircleSprite::CircleSprite(b2World* world, float rad): Sprite(world) {
     b2Rad = rad;
 
-    sfRad = b2Rad * 30;
+    sfRad = b2Rad * worldScale;
 
     sfShape = sf::CircleShape(sfRad); 
     sfShape.setFillColor(sf::Color::Blue);
@@ -131,8 +132,8 @@ CircleSprite::~CircleSprite() {
 void CircleSprite::update(float dt) {
     sf::Vector2f b2Pos = sf::Vector2f(body->GetPosition().x,
                                       body->GetPosition().y);
-    float sfX = b2Pos.x * 30 + windowWidth / 2;
-    float sfY = b2Pos.y * -30 + windowHeight / 2;
+    float sfX = b2Pos.x * worldScale + windowWidth / 2;
+    float sfY = b2Pos.y * -worldScale + windowHeight / 2;
     sfShape.setPosition(sf::Vector2f(sfX, sfY));
  
     float angle = body->GetAngle() * 180 / M_PI;
