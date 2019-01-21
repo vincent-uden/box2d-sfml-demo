@@ -26,11 +26,12 @@ protected:
 
     static const int windowWidth = 1200;
     static const int windowHeight = 800;
+    static const int worldScale = 15;
 };
 
 class BoxSprite: public Sprite {
 public:
-    BoxSprite(b2World* world, int width, int height);
+    BoxSprite(b2World* world, float width, float height);
     BoxSprite();
     ~BoxSprite();
 
@@ -71,7 +72,7 @@ public:
     ~CircleSprite();
     
     void update(float dt) override;
-    void draw(sf::RenderWindow &window);
+    void draw(sf::RenderWindow &window) override;
 
 protected:
     b2CircleShape shape;
@@ -94,4 +95,13 @@ public:
     CircleSpriteStatic(b2World* world, float rad, float fric, float x, float y);
     CircleSpriteStatic();
     ~CircleSpriteStatic();
+};
+
+class VertexSprite: public Sprite {
+public:
+    VertexSprite();
+    ~VertexSprite();
+protected:
+    sf::PrimitiveType type;
+    sf::VertexArray vertexArray;
 };

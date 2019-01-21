@@ -22,6 +22,7 @@ public:
 private:
     void update();
     void draw();
+    void addSprites();
 
 
     static const int windowWidth = 1200;
@@ -40,6 +41,8 @@ private:
 
     b2Vec2 gravity = b2Vec2(0.0f, -10.0f);
     b2World box2dWorld;
+
+    std::vector<std::unique_ptr<Sprite>> spriteGroup;
 
 };
 
