@@ -79,7 +79,6 @@ BoxSpriteDynamic::BoxSpriteDynamic(b2World* world, float width, float height, fl
     fixtureDef.density = dens;
     fixtureDef.friction = fric;
     body->CreateFixture(&fixtureDef);
-    body->SetLinearVelocity(b2Vec2(10.0f, 0.0f));
 }
 
 BoxSpriteDynamic::BoxSpriteDynamic() {

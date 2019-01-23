@@ -23,6 +23,7 @@ private:
     void update();
     void draw();
     void addSprites();
+    void shoot();
 
 
     static const int windowWidth = 1200;

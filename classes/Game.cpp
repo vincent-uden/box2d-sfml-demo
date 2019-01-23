@@ -10,6 +10,10 @@ Game::Game():
     bgFill.setFillColor(sf::Color(51, 51, 51));
     bgFill.setPosition(sf::Vector2f(0, 0));
 
+    spriteGroup.push_back(std::move(std::unique_ptr<BoxSpriteStatic>
+        (new BoxSpriteStatic(&box2dWorld, 20.0f, 0.05f, 
+                             0.3f, 0.0f, -5.0f))));
+
 }
 
 Game::~Game() {
@@ -21,7 +25,6 @@ void Game::run() {
     dt = 0;
     isRunning = true;
 
-    addSprites();
 
     while (isRunning) {
         deltaTime = clock.restart();
@@ -42,8 +45,13 @@ void Game::update() {
         } else if (event.type == sf::Event::KeyPressed) {
             switch (event.key.code) {
                 case sf::Keyboard::Key::A:
-                    // Do something
+                    shoot();
                     break;
+
+                case sf::Keyboard::Key::P:
+                    addSprites();
+                    break;
+
                 default:
                     break;
             }
@@ -75,25 +83,21 @@ void Game::draw() {
 
 void Game::addSprites() {
 
-    spriteGroup.push_back(std::move(std::unique_ptr<BoxSpriteDynamic>
-        (new BoxSpriteDynamic(&box2dWorld, 1.0f, 1.0f, 
-                              1.0f, 0.3f, -6.0f, 5.0f))));
+    for (int i = 0; i < 5; i++) {
+        for (int j = 0; j < 12; j++) {
+            spriteGroup.push_back(std::move(std::unique_ptr<BoxSpriteDynamic>
+                (new BoxSpriteDynamic(&box2dWorld, 1.0f, 1.0f, 
+                    1.0f, 2.0f, i * 2 - 7.0f, j * 2 - 4.05f))));
+        } 
+    }
+}
 
-    spriteGroup.push_back(std::move(std::unique_ptr<BoxSpriteStatic>
-        (new BoxSpriteStatic(&box2dWorld, 20.0f, 0.05f, 
-                             0.3f, 0.0f, -5.0f))));
+void Game::shoot() {
 
     spriteGroup.push_back(std::move(std::unique_ptr<CircleSpriteDynamic>
-        (new CircleSpriteDynamic(&box2dWorld, 1.0f, 1.0f, 
-                                 0.3f, 0.0f, 5.0f))));
-
-    for (int i = 0; i < 20; i++) {
-        spriteGroup.push_back(std::move(std::unique_ptr<CircleSpriteDynamic>
-            (new CircleSpriteDynamic(&box2dWorld, 0.2f, 1.0f, 
-                                     0.3f, 0.0f, 10.0f - i / 5.0f))));
-    }
-
-
-
+        (new CircleSpriteDynamic(&box2dWorld, 1.0f, 
+                              4.0f, 2.0f, -50.0f, 2.0f))));
+    spriteGroup[spriteGroup.size()- 1]->
+        getBody()->SetLinearVelocity(b2Vec2(100.0f, 0.0f));
 }
 
