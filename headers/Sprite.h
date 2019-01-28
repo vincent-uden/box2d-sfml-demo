@@ -24,8 +24,8 @@ protected:
 
     b2World* world;
 
-    static const int windowWidth = 1200;
-    static const int windowHeight = 800;
+    static const int windowWidth = 1920;
+    static const int windowHeight = 1080;
     static const int worldScale = 15;
 };
 

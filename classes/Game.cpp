@@ -2,7 +2,7 @@
 
 Game::Game():
     window(sf::VideoMode(windowWidth, windowHeight), "Box2D Test",
-           sf::Style::Close | sf::Style::Titlebar, settings),
+           sf::Style::Close | sf::Style::Fullscreen, settings),
     box2dWorld(gravity) {
     window.setFramerateLimit(60);
 
