@@ -5,6 +5,4 @@
 
 .*.sw*
 
-./build/classes/*.o
-./build/classes/*.d
-./build/a.out
+./build/*
