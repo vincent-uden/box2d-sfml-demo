@@ -5,6 +5,7 @@
 
 #include "Box2D.h"
 #include "Sprite.h"
+#include "SpriteGroup.h"
 
 class BoxSprite;
 class BoxSpriteDynamic;
@@ -44,6 +45,7 @@ private:
     b2World box2dWorld;
 
     std::vector<std::unique_ptr<Sprite>> spriteGroup;
+    SpriteGroup sprites;
 
 };
 

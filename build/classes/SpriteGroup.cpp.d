@@ -1,4 +1,5 @@
-build/./classes/main.cpp.o: classes/main.cpp lib/Box2D.h \
+build/./classes/SpriteGroup.cpp.o: classes/SpriteGroup.cpp \
+ classes/../headers/SpriteGroup.h lib/Box2D.h \
  lib/Box2D/Common/b2Settings.h lib/Box2D/Common/b2Draw.h \
  lib/Box2D/Common/b2Math.h lib/Box2D/Common/b2Settings.h \
  lib/Box2D/Common/b2Timer.h lib/Box2D/Collision/Shapes/b2CircleShape.h \
@@ -28,8 +29,9 @@ build/./classes/main.cpp.o: classes/main.cpp lib/Box2D.h \
  lib/Box2D/Dynamics/Joints/b2RevoluteJoint.h \
  lib/Box2D/Dynamics/Joints/b2RopeJoint.h \
  lib/Box2D/Dynamics/Joints/b2WeldJoint.h \
- lib/Box2D/Dynamics/Joints/b2WheelJoint.h classes/../headers/Game.h \
- classes/../headers/Sprite.h classes/../headers/SpriteGroup.h
+ lib/Box2D/Dynamics/Joints/b2WheelJoint.h classes/../headers/Sprite.h
+
+classes/../headers/SpriteGroup.h:
 
 lib/Box2D.h:
 
@@ -121,8 +123,4 @@ lib/Box2D/Dynamics/Joints/b2WeldJoint.h:
 
 lib/Box2D/Dynamics/Joints/b2WheelJoint.h:
 
-classes/../headers/Game.h:
-
 classes/../headers/Sprite.h:
-
-classes/../headers/SpriteGroup.h:

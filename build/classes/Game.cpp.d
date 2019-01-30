@@ -28,7 +28,8 @@ build/./classes/Game.cpp.o: classes/Game.cpp classes/../headers/Game.h \
  lib/Box2D/Dynamics/Joints/b2RevoluteJoint.h \
  lib/Box2D/Dynamics/Joints/b2RopeJoint.h \
  lib/Box2D/Dynamics/Joints/b2WeldJoint.h \
- lib/Box2D/Dynamics/Joints/b2WheelJoint.h classes/../headers/Sprite.h
+ lib/Box2D/Dynamics/Joints/b2WheelJoint.h classes/../headers/Sprite.h \
+ classes/../headers/SpriteGroup.h
 
 classes/../headers/Game.h:
 
@@ -123,3 +124,5 @@ lib/Box2D/Dynamics/Joints/b2WeldJoint.h:
 lib/Box2D/Dynamics/Joints/b2WheelJoint.h:
 
 classes/../headers/Sprite.h:
+
+classes/../headers/SpriteGroup.h:
