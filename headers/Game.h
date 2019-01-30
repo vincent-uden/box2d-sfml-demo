@@ -5,6 +5,7 @@
 
 #include "Box2D.h"
 #include "Sprite.h"
+#include "SpriteGroup.h"
 
 class BoxSprite;
 class BoxSpriteDynamic;
@@ -23,10 +24,11 @@ private:
     void update();
     void draw();
     void addSprites();
+    void shoot();
 
 
-    static const int windowWidth = 1200;
-    static const int windowHeight = 800;
+    static const int windowWidth = 1920;
+    static const int windowHeight = 1080;
 
     sf::ContextSettings settings = sf::ContextSettings(0, 0, 8); 
 
@@ -43,6 +45,7 @@ private:
     b2World box2dWorld;
 
     std::vector<std::unique_ptr<Sprite>> spriteGroup;
+    SpriteGroup sprites;
 
 };
 

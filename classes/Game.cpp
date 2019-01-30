@@ -1,14 +1,19 @@
 #include "../headers/Game.h"
 
-Game::Game():
+Game::Game(): 
     window(sf::VideoMode(windowWidth, windowHeight), "Box2D Test",
-           sf::Style::Close | sf::Style::Titlebar, settings),
+           sf::Style::Close | sf::Style::Fullscreen, settings),
     box2dWorld(gravity) {
     window.setFramerateLimit(60);
 
     bgFill.setSize(sf::Vector2f(windowWidth, windowHeight));
     bgFill.setFillColor(sf::Color(51, 51, 51));
     bgFill.setPosition(sf::Vector2f(0, 0));
+
+    sprites.addSprite(std::unique_ptr<BoxSpriteStatic>
+        (new BoxSpriteStatic(&box2dWorld, 20.0f, 0.05f, 
+                             0.3f, 0.0f, -5.0f)));
+
 
 }
 
@@ -21,7 +26,6 @@ void Game::run() {
     dt = 0;
     isRunning = true;
 
-    addSprites();
 
     while (isRunning) {
         deltaTime = clock.restart();
@@ -42,8 +46,13 @@ void Game::update() {
         } else if (event.type == sf::Event::KeyPressed) {
             switch (event.key.code) {
                 case sf::Keyboard::Key::A:
-                    // Do something
+                    shoot();
                     break;
+
+                case sf::Keyboard::Key::P:
+                    addSprites();
+                    break;
+
                 default:
                     break;
             }
@@ -53,10 +62,7 @@ void Game::update() {
     //
     // Box2D EVENTS
 
-    for (int i = 0; i < spriteGroup.size(); i++) {
-        spriteGroup[i]->update(dt);
-    }
-
+    sprites.update(dt);
     box2dWorld.Step(dt, 6, 2);
     // END Box2D EVENTS
 
@@ -66,34 +72,27 @@ void Game::update() {
 void Game::draw() {
     window.draw(bgFill);
 
-    for (int i = 0; i < spriteGroup.size(); i++) {
-        spriteGroup[i]->draw(window);
-    }
- 
+    sprites.draw(window);
     window.display();
 }
 
 void Game::addSprites() {
 
-    spriteGroup.push_back(std::move(std::unique_ptr<BoxSpriteDynamic>
-        (new BoxSpriteDynamic(&box2dWorld, 1.0f, 1.0f, 
-                              1.0f, 0.3f, -6.0f, 5.0f))));
-
-    spriteGroup.push_back(std::move(std::unique_ptr<BoxSpriteStatic>
-        (new BoxSpriteStatic(&box2dWorld, 20.0f, 0.05f, 
-                             0.3f, 0.0f, -5.0f))));
-
-    spriteGroup.push_back(std::move(std::unique_ptr<CircleSpriteDynamic>
-        (new CircleSpriteDynamic(&box2dWorld, 1.0f, 1.0f, 
-                                 0.3f, 0.0f, 5.0f))));
-
-    for (int i = 0; i < 20; i++) {
-        spriteGroup.push_back(std::move(std::unique_ptr<CircleSpriteDynamic>
-            (new CircleSpriteDynamic(&box2dWorld, 0.2f, 1.0f, 
-                                     0.3f, 0.0f, 10.0f - i / 5.0f))));
+    for (int i = 0; i < 5; i++) {
+        for (int j = 0; j < 12; j++) {
+            sprites.addSprite(std::unique_ptr<BoxSpriteDynamic>
+                (new BoxSpriteDynamic(&box2dWorld, 1.0f, 1.0f, 
+                    1.0f, 2.0f, i * 2 - 7.0f, j * 2 - 4.05f)));
+        } 
     }
+}
 
+void Game::shoot() {
 
+    int index = sprites.addSprite(std::unique_ptr<CircleSpriteDynamic>
+        (new CircleSpriteDynamic(&box2dWorld, 1.0f, 
+                              4.0f, 2.0f, -50.0f, 2.0f)));
 
+    sprites.setVelocity(index, b2Vec2(100.0f, 0.0f));
 }
 
