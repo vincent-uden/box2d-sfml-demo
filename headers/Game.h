@@ -6,6 +6,7 @@
 #include "Box2D.h"
 #include "Sprite.h"
 #include "SpriteGroup.h"
+#include "EventSystem.h"
 
 class BoxSprite;
 class BoxSpriteDynamic;

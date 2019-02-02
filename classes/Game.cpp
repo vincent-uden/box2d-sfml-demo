@@ -14,7 +14,6 @@ Game::Game():
         (new BoxSpriteStatic(&box2dWorld, 20.0f, 0.05f, 
                              0.3f, 0.0f, -5.0f)));
 
-
 }
 
 Game::~Game() {
