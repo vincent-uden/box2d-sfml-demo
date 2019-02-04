@@ -1,34 +1,145 @@
 #include "../headers/EventSystem.h"
 
-KeyCode Keyboard::A {65, "A"};
-KeyCode Keyboard::B {66, "B"};
-KeyCode Keyboard::C {67, "C"};
-KeyCode Keyboard::D {68, "D"};
-KeyCode Keyboard::E {69, "E"};
-KeyCode Keyboard::F {70, "F"};
-KeyCode Keyboard::G {71, "G"};
-KeyCode Keyboard::H {72, "H"};
-KeyCode Keyboard::I {73, "I"};
-KeyCode Keyboard::J {74, "J"};
-KeyCode Keyboard::K {75, "K"};
-KeyCode Keyboard::L {76, "L"};
-KeyCode Keyboard::M {77, "M"};
-KeyCode Keyboard::N {78, "N"};
-KeyCode Keyboard::O {79, "O"};
-KeyCode Keyboard::P {80, "P"};
-KeyCode Keyboard::Q {81, "Q"};
-KeyCode Keyboard::R {82, "R"};
-KeyCode Keyboard::S {83, "S"};
-KeyCode Keyboard::T {84, "T"};
-KeyCode Keyboard::U {85, "U"};
-KeyCode Keyboard::V {86, "V"};
-KeyCode Keyboard::W {87, "W"};
-KeyCode Keyboard::X {88, "X"};
-KeyCode Keyboard::Y {89, "Y"};
-KeyCode Keyboard::Z {90, "Z"};
+
+std::vector<int> KeyCode::keyCodes = {
+    65,
+    66,
+    67,
+    68,
+    69,
+    70,
+    71,
+    72,
+    73,
+    74,
+    75,
+    76,
+    77,
+    78,
+    79,
+    80,
+    81,
+    82,
+    83,
+    84,
+    85,
+    86,
+    87,
+    88,
+    89,
+    90
+};
+
+std::vector<std::string> KeyCode::keyLabels = {
+    "A",
+    "B",
+    "C",
+    "D",
+    "E",
+    "F",
+    "G",
+    "H",
+    "I",
+    "J",
+    "K",
+    "L",
+    "M",
+    "N",
+    "O",
+    "P",
+    "Q",
+    "R",
+    "S",
+    "T",
+    "U",
+    "V",
+    "W",
+    "X",
+    "Y",
+    "Z"
+};
+
+// TODO; Add this as some static stuff
+KeyCode Keyboard::A(65);    // "A"
+KeyCode Keyboard::B(66);    // "B"
+KeyCode Keyboard::C(67);    // "C"
+KeyCode Keyboard::D(68);    // "D"
+KeyCode Keyboard::E(69);    // "E"
+KeyCode Keyboard::F(70);    // "F"
+KeyCode Keyboard::G(71);    // "G"
+KeyCode Keyboard::H(72);    // "H"
+KeyCode Keyboard::I(73);    // "I"
+KeyCode Keyboard::J(74);    // "J"
+KeyCode Keyboard::K(75);    // "K"
+KeyCode Keyboard::L(76);    // "L"
+KeyCode Keyboard::M(77);    // "M"
+KeyCode Keyboard::N(78);    // "N"
+KeyCode Keyboard::O(79);    // "O"
+KeyCode Keyboard::P(80);    // "P"
+KeyCode Keyboard::Q(81);    // "Q"
+KeyCode Keyboard::R(82);    // "R"
+KeyCode Keyboard::S(83);    // "S"
+KeyCode Keyboard::T(84);    // "T"
+KeyCode Keyboard::U(85);    // "U"
+KeyCode Keyboard::V(86);    // "V"
+KeyCode Keyboard::W(87);    // "W"
+KeyCode Keyboard::X(88);    // "X"
+KeyCode Keyboard::Y(89);    // "Y"
+KeyCode Keyboard::Z(90);    // "Z"
+
+KeyCode::KeyCode() {
+    this->code = -1;
+    this->label = "Unknown";
+}
+
+KeyCode::KeyCode(int code) {
+    bool found = false;
+    for (int i = 0; i < keyCodes.size(); i++) {
+        if (code == keyCodes[i]) {
+            this->code = code;
+            this->label = keyLabels[i];
+            found = true;
+            break;
+        }
+    }
+
+    if (!found) {
+        this->code = -1;
+        this->label = "Unknown";
+    }
+}
+
+KeyCode::KeyCode(std::string label) {
+    bool found = false;
+    for (int i = 0; i < keyLabels.size(); i++) {
+        if (label == keyLabels[i]) {
+            this->code = keyCodes[i];
+            this->label = label;
+            found = true;
+            break;
+        }
+    }
+
+    if (!found) {
+        this->code = -1;
+        this->label = "Unknown";
+    }
+}
+
+KeyCode::~KeyCode() {
+    
+}
 
 std::string Event::getType() {
     return type;
+}
+
+KeyboardEvent::KeyboardEvent() {
+
+}
+
+KeyboardEvent::~KeyboardEvent() {
+
 }
 
 KeyCode KeyboardEvent::getKeyCode() {
@@ -87,7 +198,7 @@ void EventSystem::pushEvent(sf::Event sfEvent) {
     }
 }
 
-std::string EventSystem::getKeyName(sf::Keyboard::Key key) {
+std::string EventSystem::getSfKeyLabel(sf::Keyboard::Key key) {
     switch(key) {
     default:
     case sf::Keyboard::Unknown:
@@ -296,3 +407,4 @@ std::string EventSystem::getKeyName(sf::Keyboard::Key key) {
             return "Pause";
     }
 }
+

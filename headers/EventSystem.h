@@ -4,11 +4,20 @@
 #include <vector>
 #include <memory>
 
+class KeyCode {
+public:
+    KeyCode();
+    KeyCode(int code);
+    KeyCode(std::string label);
+    ~KeyCode();
 
-typedef struct KeyCode {
     int code;
-    int label;
-} KeyCode;
+
+    std::string label;
+
+    static std::vector<int> keyCodes;
+    static std::vector<std::string> keyLabels;
+};
 
 namespace Keyboard {
     extern KeyCode A;
@@ -50,6 +59,8 @@ protected:
 // Also abstract
 class KeyboardEvent: public Event {
 public:
+    KeyboardEvent();
+    ~KeyboardEvent();
     KeyCode getKeyCode();
 
 protected:
@@ -99,5 +110,6 @@ public:
 
 private:
     std::string getSfKeyLabel(sf::Keyboard::Key key);
+
     std::vector<std::shared_ptr<Event>> eventQueue;
 };
