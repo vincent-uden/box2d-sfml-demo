@@ -5,15 +5,26 @@ Game::Game():
            sf::Style::Close | sf::Style::Fullscreen, settings),
     box2dWorld(gravity) {
     window.setFramerateLimit(60);
-
     bgFill.setSize(sf::Vector2f(windowWidth, windowHeight));
     bgFill.setFillColor(sf::Color(51, 51, 51));
     bgFill.setPosition(sf::Vector2f(0, 0));
 
-    sprites.addSprite(std::unique_ptr<BoxSpriteStatic>
-        (new BoxSpriteStatic(&box2dWorld, 20.0f, 0.05f, 
-                             0.3f, 0.0f, -5.0f)));
+    sprites.setWorld(&box2dWorld);
 
+    int index1 = sprites.addSprite(std::unique_ptr<BoxSpriteStatic>
+    (new BoxSpriteStatic(&box2dWorld, 20.0f, 0.05f, 0.3f, 0.0f, -5.0f)));
+
+    int index2 = sprites.addSprite(std::unique_ptr<BoxSpriteDynamic>
+    (new BoxSpriteDynamic(&box2dWorld, 0.5f, 5.0f, 0.3f, 1.0f, 0.0f, -5.0f)));
+        
+    sprites.createRevoluteJoint(index1, index2, sprites.sprites[index1]->getBody()->GetPosition());
+
+    
+
+
+
+
+    
 
 }
 
