@@ -14,13 +14,22 @@ public:
 
     virtual void update(float dt);
     virtual void draw(sf::RenderWindow &window);
+
+    void addJoint(b2Joint* joint);
+    void setRevJointMotorSpd(float speed);
+    void setRevJointTorque(float torque);
+    float getRevJointMotorSpd(int index);
+    float getRevJointTorque(int index);
     
     b2Body* getBody();
+    std::vector<b2Joint*> getJoints();
 
 protected:
     b2BodyDef bodyDef;
     b2Body* body;
     b2FixtureDef fixtureDef;
+
+    std::vector<b2Joint*> joints;
 
     b2World* world;
 

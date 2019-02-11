@@ -24,6 +24,34 @@ b2Body* Sprite::getBody() {
     return body;
 }
 
+void Sprite::addJoint(b2Joint* joint) {
+    joints.push_back(joint);
+}
+
+void Sprite::setRevJointMotorSpd(float spd) {
+    b2RevoluteJoint* joint = (b2RevoluteJoint*) joints[0];
+    joint->SetMotorSpeed(spd);
+}
+
+void Sprite::setRevJointTorque(float torque) {
+    b2RevoluteJoint* joint = (b2RevoluteJoint*) joints[0];
+    joint->SetMaxMotorTorque(torque);
+}
+
+std::vector<b2Joint*> Sprite::getJoints() {
+    return joints;
+}
+
+float Sprite::getRevJointMotorSpd(int index) {
+    b2RevoluteJoint* joint = (b2RevoluteJoint*) joints[index];
+    return joint->GetMotorSpeed();
+}
+
+float Sprite::getRevJointTorque(int index) {
+    b2RevoluteJoint* joint = (b2RevoluteJoint*) joints[index];
+    return joint->GetMotorTorque(0.0f);
+}
+
 BoxSprite::BoxSprite(b2World* world, float width, float height): Sprite(world) {
 
     b2Width = width;

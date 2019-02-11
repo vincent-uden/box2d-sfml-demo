@@ -53,10 +53,14 @@ void SpriteGroup::createRevoluteJoint
     jointDef.localAnchorB.Set(0.0f, 0.0f);
 
     jointDef.enableMotor = true;
-    jointDef.maxMotorTorque = 200000;
-    jointDef.motorSpeed = 720 * M_PI / 180.0f;
+    //jointDef.maxMotorTorque = 200000;
+    //jointDef.motorSpeed = 720 * M_PI / 180.0f
 
-    world->CreateJoint(&jointDef);
+
+    b2Joint* joint = world->CreateJoint(&jointDef);
+    sprites[index1]->addJoint(joint);
+    sprites[index2]->addJoint(joint);
+
 
 
 

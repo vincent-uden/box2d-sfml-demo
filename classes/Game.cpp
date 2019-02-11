@@ -15,17 +15,11 @@ Game::Game():
     (new BoxSpriteStatic(&box2dWorld, 20.0f, 0.05f, 0.3f, 0.0f, -5.0f)));
 
     int index2 = sprites.addSprite(std::unique_ptr<BoxSpriteDynamic>
-    (new BoxSpriteDynamic(&box2dWorld, 0.5f, 10.0f, 0.3f, 1.0f, 0.0f, -5.0f)));
+    (new BoxSpriteDynamic(&box2dWorld, 1.0f, 3.0f, 0.3f, 1.0f, 0.0f, -5.0f)));
         
     sprites.createRevoluteJoint(index1, index2, sprites.sprites[index1]->getBody()->GetPosition());
 
-    
-
-
-
-
-    
-
+    sprites.sprites[1]->setRevJointTorque(20000);
 }
 
 Game::~Game() {
@@ -64,6 +58,13 @@ void Game::update() {
                     addSprites();
                     break;
 
+                case sf::Keyboard::Key::L:
+                    sprites.sprites[1]->setRevJointMotorSpd(sprites.sprites[1]->getRevJointMotorSpd(0) + 1);
+                    break;
+                case sf::Keyboard::Key::K:
+                    sprites.sprites[1]->setRevJointMotorSpd(sprites.sprites[1]->getRevJointMotorSpd(0) - 1);
+                    break;
+                
                 default:
                     break;
             }
